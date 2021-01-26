@@ -1,2 +1,2 @@
 # ProxChat
- A proximity chat plugin for Nukkit servers
+A superior proximity chat plugin for Nukkit servers
