@@ -20,42 +20,42 @@ public class PlayerChatListner implements Listener {
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = false) //DON'T FORGET THE ANNOTATION @EventHandler
     public void PlayerMoves(PlayerChatEvent event) {
 
-        // For every recipant of the message, it will block the message if the sender is not within the range
-        for (Player recipiant : plugin.getServer().getOnlinePlayers().values()) {
+        // For every recipient of the message, it will block the message if the sender is not within the range
+        for (Player recipient : plugin.getServer().getOnlinePlayers().values()) {
 
         // Get the distance and make positive
         double SenderX = event.getPlayer().getPosition().x;
-        double RecipiantX = recipiant.getPosition().x;
+        double recipientX = recipient.getPosition().x;
         if (SenderX < 0){SenderX = SenderX * -1;}
-        if (RecipiantX < 0){RecipiantX = RecipiantX * -1;}
-        double DistanceX = SenderX - RecipiantX;
+        if (recipientX < 0){recipientX = recipientX * -1;}
+        double DistanceX = SenderX - recipientX;
         if (DistanceX < 0){DistanceX = DistanceX * -1;};
 
         double SenderY = event.getPlayer().getPosition().y;
-        double RecipiantY = recipiant.getPosition().y;
+        double recipientY = recipient.getPosition().y;
         if (SenderY < 0){SenderY = SenderY * -1;}
-        if (RecipiantY < 0){RecipiantY = RecipiantY * -1;}
-        double DistanceY = SenderY - RecipiantY;
+        if (recipientY < 0){recipientY = recipientY * -1;}
+        double DistanceY = SenderY - recipientY;
         if (DistanceY < 0){DistanceY = DistanceY * -1;};
 
         double SenderZ = event.getPlayer().getPosition().z;
-        double RecipiantZ = recipiant.getPosition().z;
+        double recipientZ = recipient.getPosition().z;
         if (SenderZ < 0){SenderZ = SenderZ * -1;}
-        if (RecipiantZ < 0){RecipiantZ = RecipiantZ * -1;}
-        double DistanceZ = SenderZ - RecipiantZ;
+        if (recipientZ < 0){recipientZ = recipientZ * -1;}
+        double DistanceZ = SenderZ - recipientZ;
         if (DistanceZ < 0){DistanceZ = DistanceZ * -1;};
 
 
         //Check Player Position against the Config set radius and apply ruling
-        if (DistanceX <= plugin.getConfig().getDouble("chatradius") & DistanceY <= plugin.getConfig().getDouble("chatradius") & DistanceZ < plugin.getConfig().getDouble("chatradius") & event.getPlayer().getLevel().getName() == recipiant.getLevel().getName()) {
+        if (DistanceX <= plugin.getConfig().getDouble("chatradius") & DistanceY <= plugin.getConfig().getDouble("chatradius") & DistanceZ < plugin.getConfig().getDouble("chatradius") & event.getPlayer().getLevel().getName() == recipient.getLevel().getName()) {
             // Player is in the same world and in range, allow message to recipient
             Set<CommandSender> r = event.getRecipients();
-            r.add(recipiant);
+            r.add(recipient);
         }
         else {
             //Player is not in range or not in world, block message to recipient
             Set<CommandSender> r = event.getRecipients();
-            r.remove(recipiant);
+            r.remove(recipient);
         } }
     }
 }
